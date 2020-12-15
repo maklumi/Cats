@@ -24,15 +24,4 @@ class DetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val tv = view.findViewById<TextView>(R.id.textView)
-        tv.text = args.catUuid.toString()
-
-        val fab = view.findViewById<FloatingActionButton>(R.id.fabFragDetail)
-        fab.setOnClickListener {
-            view.findNavController().navigate(R.id.action_detailFragment_to_listFragment)
-        }
-    }
 }
