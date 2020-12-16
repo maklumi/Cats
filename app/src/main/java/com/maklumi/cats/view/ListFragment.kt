@@ -6,13 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.maklumi.cats.R
 import com.maklumi.cats.databinding.FragmentListBinding
-import com.maklumi.cats.model.Kucing
 import com.maklumi.cats.viewmodel.ListViewModel
 
 class ListFragment : Fragment() {
@@ -34,9 +29,18 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.refresh()
+//        viewModel.refresh()
+        viewModel.fetchDariRemoteGunaRxjava()
         binding.recyclerviewFragList.layoutManager = LinearLayoutManager(context)
         binding.recyclerviewFragList.adapter = catListAdapter
+
+        binding.swipeRefreshLayoutFragList.setOnRefreshListener {
+            binding.recyclerviewFragList.visibility = View.GONE
+            binding.textViewMesejRalat.visibility = View.GONE
+            binding.progressBarUntukLoading.visibility = View.VISIBLE
+            viewModel.fetchDariRemoteGunaCoroutines()
+            binding.swipeRefreshLayoutFragList.isRefreshing = false
+        }
 
         observeViewModel()
     }
