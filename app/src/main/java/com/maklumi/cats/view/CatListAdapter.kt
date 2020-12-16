@@ -7,6 +7,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.maklumi.cats.databinding.ItemCatBinding
 import com.maklumi.cats.model.Kucing
+import com.maklumi.cats.util.lukisanPutaran
+import com.maklumi.cats.util.muatturun
 
 class CatListAdapter(private val catList: ArrayList<Kucing>) :
     RecyclerView.Adapter<CatListAdapter.CatViewHolder>() {
@@ -29,6 +31,10 @@ class CatListAdapter(private val catList: ArrayList<Kucing>) :
             it.findNavController()
                 .navigate(ListFragmentDirections.actionListFragmentToDetailFragment())
         }
+        holder.binding.ivCatItemCat.muatturun(
+            catList[position].image?.url,
+            lukisanPutaran(holder.binding.ivCatItemCat.context)
+        )
     }
 
     override fun getItemCount(): Int = catList.size

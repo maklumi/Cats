@@ -17,7 +17,7 @@ data class Kucing(
     @SerializedName("origin")
     val origin: String,
     @SerializedName("image")
-    val image: Image,
+    val image: Image?,
     @SerializedName("weight")
     val weight: Weight,
 )
