@@ -1,10 +1,10 @@
 package com.maklumi.cats.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maklumi.cats.databinding.FragmentListBinding
@@ -29,8 +29,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewModel.refresh()
-        viewModel.fetchDariRemoteGunaRxjava()
+        viewModel.refresh()
         binding.recyclerviewFragList.layoutManager = LinearLayoutManager(context)
         binding.recyclerviewFragList.adapter = catListAdapter
 
@@ -38,7 +37,7 @@ class ListFragment : Fragment() {
             binding.recyclerviewFragList.visibility = View.GONE
             binding.textViewMesejRalat.visibility = View.GONE
             binding.progressBarUntukLoading.visibility = View.VISIBLE
-            viewModel.fetchDariRemoteGunaCoroutines()
+            viewModel.refresh()
             binding.swipeRefreshLayoutFragList.isRefreshing = false
         }
 

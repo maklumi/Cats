@@ -3,17 +3,16 @@ package com.maklumi.cats.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.maklumi.cats.databinding.ItemCatBinding
-import com.maklumi.cats.model.Kucing
+import com.maklumi.cats.model.sqlpart.Cat
 import com.maklumi.cats.util.lukisanPutaran
 import com.maklumi.cats.util.muatturun
 
-class CatListAdapter(private val catList: ArrayList<Kucing>) :
+class CatListAdapter(private val catList: ArrayList<Cat>) :
     RecyclerView.Adapter<CatListAdapter.CatViewHolder>() {
 
-    fun updateCatList(newCatList: List<Kucing>) {
+    fun updateCatList(newCatList: List<Cat>) {
         catList.clear()
         catList.addAll(newCatList)
         notifyDataSetChanged()
@@ -28,11 +27,12 @@ class CatListAdapter(private val catList: ArrayList<Kucing>) :
         holder.binding.tvNamaItemCat.text = catList[position].name
         holder.binding.tvJangkaHayatItemCat.text = catList[position].lifeSpan
         holder.binding.root.setOnClickListener {
+            val catUuid = catList[position].uuid
             it.findNavController()
-                .navigate(ListFragmentDirections.actionListFragmentToDetailFragment())
+                .navigate(ListFragmentDirections.actionListFragmentToDetailFragment(catUuid))
         }
         holder.binding.ivCatItemCat.muatturun(
-            catList[position].image?.url,
+            catList[position].image,
             lukisanPutaran(holder.binding.ivCatItemCat.context)
         )
     }

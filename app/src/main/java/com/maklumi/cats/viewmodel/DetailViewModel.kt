@@ -1,27 +1,20 @@
 package com.maklumi.cats.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.maklumi.cats.model.Image
-import com.maklumi.cats.model.Kucing
-import com.maklumi.cats.model.Weight
+import com.maklumi.cats.model.sqlpart.Cat
+import com.maklumi.cats.model.sqlpart.CatDatabase
+import kotlinx.coroutines.launch
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : BaseViewModel(application) {
 
-    val cat = MutableLiveData<Kucing>()
+    val cat = MutableLiveData<Cat>()
 
-    fun fetch() {
-        val seekor = Kucing(
-            "1",
-            "Name1",
-            "10",
-            "Temper1",
-            "Description1",
-            "Origin1",
-            Image(""),
-            Weight("1.1")
-        )
-
-        cat.value = seekor
+    fun fetch(catUuid: Int) {
+        launch {
+            val dao = CatDatabase(getApplication()).catDao()
+            val result = dao.getKucing(catUuid)
+            cat.value = result
+        }
     }
 }
