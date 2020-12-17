@@ -7,11 +7,16 @@
         <variable
             name="cat"
             type="com.maklumi.cats.model.sqlpart.Cat" />
+
+        <variable
+            name="warnapelet"
+            type="com.maklumi.cats.util.WarnaLatar" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{warnapelet.warna}"
         tools:context=".view.DetailFragment">
 
         <ImageView

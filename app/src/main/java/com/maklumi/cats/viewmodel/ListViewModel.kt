@@ -41,7 +41,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
             try {
                 val cats = CatDatabase(getApplication()).catDao().getSemuaKucing()
                 catsDiperolehi(cats)
-                Toast.makeText(getApplication(), "Senarai lokal", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(getApplication(), "Senarai lokal", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 e.printStackTrace()
             }

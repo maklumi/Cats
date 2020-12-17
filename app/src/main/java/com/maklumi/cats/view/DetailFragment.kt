@@ -1,5 +1,7 @@
 package com.maklumi.cats.view
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.palette.graphics.Palette
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.maklumi.cats.databinding.FragmentDetailBinding
+import com.maklumi.cats.util.WarnaLatar
 import com.maklumi.cats.util.lukisanPutaran
 import com.maklumi.cats.util.muatturun
 import com.maklumi.cats.viewmodel.DetailViewModel
@@ -44,19 +51,28 @@ class DetailFragment : Fragment() {
         viewModel.cat.observe(viewLifecycleOwner) { cat ->
             cat?.let {
                 binding.cat = cat
-//                binding.ivCatFragDetail.muatturun(
-//                    cat.image,
-//                    lukisanPutaran(binding.ivCatFragDetail.context)
-//                )
+                it.image?.let { url -> tukarWarnaLatar(url) }
                 binding.tvWeightFragDetail.text = poundsToKgConversion(cat.weight)
-//                binding.tvNameFragDetail.text = cat.name
-//                binding.tvTemperFragDetail.text = cat.temperament
-//                binding.tvDescriptionFragDetail.text = cat.description
-//                binding.tvLifeSpanFragDetail.text = "Hayat: " + cat.lifeSpan + " tahun"
-//                binding.tvOriginFragDetail.text = "Asal: ${cat.origin}"
             }
-
         }
+    }
+
+    private fun tukarWarnaLatar(url: String) {
+        Glide.with(this)
+            .asBitmap()
+            .load(url)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    Palette.from(resource).generate { palette ->
+                        val intColor = palette?.vibrantSwatch?.rgb ?: 0
+                        val myPalette = WarnaLatar(intColor)
+                        binding.warnapelet = myPalette
+                    }
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
     }
 
     override fun onDestroy() {
