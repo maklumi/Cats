@@ -8,6 +8,7 @@ import com.maklumi.cats.model.service.CatsApiService
 import com.maklumi.cats.model.sqlpart.Cat
 import com.maklumi.cats.model.sqlpart.CatDatabase
 import com.maklumi.cats.util.MySharedPref
+import com.maklumi.cats.util.Notifikasi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -61,6 +62,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
 //                        @formatter:off
                         Toast.makeText(getApplication(), "Senarai dari internet", Toast.LENGTH_SHORT).show()
 //                        @formatter:on
+                        Notifikasi(getApplication()).rekaNotis()
                     }
 
                     override fun onError(e: Throwable) {
