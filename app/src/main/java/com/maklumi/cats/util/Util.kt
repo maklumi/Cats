@@ -9,6 +9,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.bumptech.glide.request.RequestOptions
 import com.maklumi.cats.R
 
+const val ID_PERMOHONAN_SMS = 45664
+
 fun lukisanPutaran(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {
         strokeWidth = 10f

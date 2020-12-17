@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/aksi_hantar_sms"
+        android:icon="@drawable/ic_hantar"
+        android:title="Hantar SMS"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/aksi_kongsi"
+        android:icon="@drawable/ic_kongsi"
+        android:title="Kongsi"
+        app:showAsAction="ifRoom" />
+
+</menu>
