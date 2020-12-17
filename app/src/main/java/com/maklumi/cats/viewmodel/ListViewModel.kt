@@ -25,15 +25,21 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
     val loading = MutableLiveData<Boolean>()
 
     private val prefHelper = MySharedPref(getApplication())
-    private val masaSimpanan = 5 * 60 * 1000 * 1000 * 1000L
+    private var masaSimpanan = 5 * 60 * 1000 * 1000 * 1000L
 
     fun refresh() {
+        periksaMasaSimpananDariCache()
         val timestamp = prefHelper.timestamp()
-        if (System.nanoTime() - timestamp > masaSimpanan) { // baca dari lokal saja
+        if (System.nanoTime() - timestamp > masaSimpanan) {
             bacaDariLocalDatabase()
         } else {
             fetchDariRemoteGunaRxjava()
         }
+    }
+
+    private fun periksaMasaSimpananDariCache() {
+        val masaCache = prefHelper.nilaiBerapaLamaCache()
+        masaSimpanan = masaCache * 60 * 1000 * 1000 * 1000L
     }
 
     private fun bacaDariLocalDatabase() {

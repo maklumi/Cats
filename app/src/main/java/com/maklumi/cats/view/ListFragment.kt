@@ -1,13 +1,12 @@
 package com.maklumi.cats.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.maklumi.cats.R
 import com.maklumi.cats.databinding.FragmentListBinding
 import com.maklumi.cats.util.CatItemListener
 import com.maklumi.cats.viewmodel.ListViewModel
@@ -26,6 +25,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return _binding?.root
     }
 
@@ -84,5 +84,17 @@ class ListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_untuk_listfragment, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settingmenulistfragment) {
+            findNavController().navigate(ListFragmentDirections.actionListFragmentToSettingsFragment())
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

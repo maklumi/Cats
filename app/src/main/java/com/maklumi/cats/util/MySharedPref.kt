@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import java.lang.NumberFormatException
 
 class MySharedPref {
 
@@ -35,5 +36,16 @@ class MySharedPref {
 
     fun timestamp(): Long {
         return prefs?.getLong(TIME_STAMP, 0L) ?: 0L
+    }
+
+    fun nilaiBerapaLamaCache(): Int {
+        var nilai = 5
+        try {
+            val nilaidisimpan = prefs?.getString("tempoh_cache_data", "0")
+            nilai = nilaidisimpan?.trim()?.toInt() ?: 0
+        } catch (e: NumberFormatException) {
+            e.printStackTrace()
+        }
+        return nilai
     }
 }
