@@ -1,7 +1,6 @@
 package com.maklumi.cats.viewmodel
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.maklumi.cats.model.Kucing
@@ -29,7 +28,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
 
     fun refresh() {
         val timestamp = prefHelper.timestamp()
-        if (System.nanoTime() - timestamp < masaSimpanan) {
+        if (System.nanoTime() - timestamp > masaSimpanan) { // baca dari lokal saja
             bacaDariLocalDatabase()
         } else {
             fetchDariRemoteGunaRxjava()

@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="125dp"
-    android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/ivCatItemCat"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:padding="4dp" />
+    <data>
+
+        <variable
+            name="cat"
+            type="com.maklumi.cats.model.sqlpart.Cat" />
+
+        <variable
+            name="peratiSentuh"
+            type="com.maklumi.cats.util.CatItemListener" />
+    </data>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="4dp">
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:onClick="@{()->peratiSentuh.bilaKelik(cat)}"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvNamaItemCat"
-            style="@style/Tajuk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Kucing" />
+        <ImageView
+            android:id="@+id/ivCatItemCat"
+            itemCat_url="@{cat.image}"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:padding="4dp" />
 
-        <TextView
-            android:id="@+id/tvJangkaHayatItemCat"
-            style="@style/Teks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JangkaHayat" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/tvNamaItemCat"
+                style="@style/Tajuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cat.name}" />
+
+            <TextView
+                android:id="@+id/tvJangkaHayatItemCat"
+                style="@style/Teks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cat.lifeSpan}"
+
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

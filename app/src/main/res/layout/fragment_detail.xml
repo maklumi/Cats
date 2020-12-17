@@ -1,82 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.DetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/ivCatFragDetail"
+    <data>
+
+        <variable
+            name="cat"
+            type="com.maklumi.cats.model.sqlpart.Cat" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:minHeight="200dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_height="match_parent"
+        tools:context=".view.DetailFragment">
 
-    <TextView
-        android:id="@+id/tvNameFragDetail"
-        style="@style/Tajuk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ivCatFragDetail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="4dp"
-        android:text="Nama Kucing" />
+        <ImageView
+            android:id="@+id/ivCatFragDetail"
+            itemCat_url="@{cat.image}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:minHeight="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/tvTemperFragDetail"
-        style="@style/Teks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvNameFragDetail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="4dp"
-        android:text="Temper kucing" />
+        <TextView
+            android:id="@+id/tvNameFragDetail"
+            style="@style/Tajuk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivCatFragDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:text="@{cat.name}" />
 
-    <TextView
-        android:id="@+id/tvOriginFragDetail"
-        style="@style/Teks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvTemperFragDetail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="4dp"
-        android:text="Origin" />
+        <TextView
+            android:id="@+id/tvTemperFragDetail"
+            style="@style/Teks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNameFragDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:text="@{cat.temperament}" />
 
-    <TextView
-        android:id="@+id/tvDescriptionFragDetail"
-        style="@style/Teks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvOriginFragDetail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
-        android:text="Keterangan" />
+        <TextView
+            android:id="@+id/tvOriginFragDetail"
+            style="@style/Teks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTemperFragDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:text='@{"Asal: " + cat.origin}' />
 
-    <TextView
-        android:id="@+id/tvLifeSpanFragDetail"
-        style="@style/Teks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvDescriptionFragDetail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="tahun" />
+        <TextView
+            android:id="@+id/tvDescriptionFragDetail"
+            style="@style/Teks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvOriginFragDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
+            android:text="@{cat.description}" />
 
-    <TextView
-        android:id="@+id/tvWeightFragDetail"
-        style="@style/Teks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvLifeSpanFragDetail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="4dp"
-        android:text="KG" />
+        <TextView
+            android:id="@+id/tvLifeSpanFragDetail"
+            style="@style/Teks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvDescriptionFragDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:text='@{"Hayat: " + cat.lifeSpan + " tahun"}' />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvWeightFragDetail"
+            style="@style/Teks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLifeSpanFragDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:text="Berat" />
+
+    </RelativeLayout>
+</layout>

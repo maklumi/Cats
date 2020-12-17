@@ -2,6 +2,7 @@ package com.maklumi.cats.util
 
 import android.content.Context
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
@@ -25,4 +26,9 @@ fun ImageView.muatturun(uri: String?, putarputar: CircularProgressDrawable) {
         .load(uri)
         .transition(withCrossFade())
         .into(this)
+}
+
+@BindingAdapter("itemCat_url")
+fun muatGambar(view: ImageView, url: String?) {
+    view.muatturun(url, lukisanPutaran(view.context))
 }

@@ -43,19 +43,25 @@ class DetailFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.cat.observe(viewLifecycleOwner) { cat ->
             cat?.let {
-                binding.ivCatFragDetail.muatturun(
-                    cat.image,
-                    lukisanPutaran(binding.ivCatFragDetail.context)
-                )
+                binding.cat = cat
+//                binding.ivCatFragDetail.muatturun(
+//                    cat.image,
+//                    lukisanPutaran(binding.ivCatFragDetail.context)
+//                )
                 binding.tvWeightFragDetail.text = poundsToKgConversion(cat.weight)
-                binding.tvNameFragDetail.text = cat.name
-                binding.tvTemperFragDetail.text = cat.temperament
-                binding.tvDescriptionFragDetail.text = cat.description
-                binding.tvLifeSpanFragDetail.text = "Hayat: " + cat.lifeSpan + " tahun"
-                binding.tvOriginFragDetail.text = "Asal: ${cat.origin}"
+//                binding.tvNameFragDetail.text = cat.name
+//                binding.tvTemperFragDetail.text = cat.temperament
+//                binding.tvDescriptionFragDetail.text = cat.description
+//                binding.tvLifeSpanFragDetail.text = "Hayat: " + cat.lifeSpan + " tahun"
+//                binding.tvOriginFragDetail.text = "Asal: ${cat.origin}"
             }
 
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun poundsToKgConversion(ps: String): String {

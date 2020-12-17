@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maklumi.cats.databinding.FragmentListBinding
+import com.maklumi.cats.util.CatItemListener
 import com.maklumi.cats.viewmodel.ListViewModel
 
 class ListFragment : Fragment() {
 
     private val viewModel: ListViewModel by viewModels()
-    private val catListAdapter = CatListAdapter(arrayListOf())
+    private val catListAdapter =
+        CatListAdapter(CatItemListener { catId -> bilaItemRecyclerViewDiklik(catId) })
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -68,5 +71,18 @@ class ListFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun bilaItemRecyclerViewDiklik(catUuid: Int) {
+        findNavController().navigate(
+            ListFragmentDirections.actionListFragmentToDetailFragment(
+                catUuid
+            )
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
